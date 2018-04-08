@@ -7,3 +7,41 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+html, body,#app,#container,.sections,.section,.section-content {
+  width: 100%;
+  height: 100%;
+}
+body {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  font: 400 14px/1.4 "Proxima Nova",Arial,Helvetica,sans-serif;
+  background: #221884;
+  background: -moz-linear-gradient(45deg,#221884 0,#be3679 50%,#ffa458 100%);
+  background: -webkit-linear-gradient(45deg,#221884 0,#be3679 50%,#ffa458 100%);
+  background: linear-gradient(45deg,#221884 0,#be3679 50%,#ffa458 100%);
+}
+
+.sections {
+  position: relative;
+}
+@-webkit-keyframes expand {
+  0% {
+    width: 100%;
+    height: 0px;
+    position: absolute !important;
+    top: 100%;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+.section:nth-child(2) {
+  position: absolute !important;
+  top: 0;
+  -webkit-animation-name: expand;
+  -webkit-animation-duration: 10s;
+}
+
