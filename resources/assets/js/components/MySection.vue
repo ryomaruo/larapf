@@ -11,7 +11,7 @@
   export default {
     props: ['tmpl_name'],
     components: {
-     'example': require('./Example.vue'),
+     'hello': require('./Hello.vue'),
      'p5canvas': require('./P5Canvas.vue')
     }
   }

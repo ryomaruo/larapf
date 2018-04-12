@@ -18,13 +18,11 @@ require('./bootstrap');
  */
 
 
-//Vue.component('my_section', require('./components/MySection.vue'));
-//Vue.component('example', require('./components/Example.vue'));
-//Vue.component('p5canvas', require('./components/P5Canvas.vue'));
 const app = new Vue({
     el: '#app',
     components: {
       'my_section': require('./components/MySection.vue'),
-      'p5canvas': require('./components/P5Canvas.vue')
+      'p5canvas': require('./components/P5Canvas.vue'),
+      'divided-section': require('./components/DividedSection.vue')
    }
 });
