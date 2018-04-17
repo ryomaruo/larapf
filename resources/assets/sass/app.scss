@@ -43,9 +43,25 @@ body {
   position: absolute !important;
   top: 0;
   -webkit-animation-name: expand;
-  -webkit-animation-duration: 17s;
+  -webkit-animation-duration: 15s;
+}
+
+/* vvv  util  vvv */
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.left {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
 }
 .pointer {
   cursor: pointer;
 }
 
+/* ^^^  util  ^^^ */

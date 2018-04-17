@@ -53,7 +53,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     -webkit-animation-name: fadeInFromAbove;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 3.5s;
     .s-im {
       font-size: 40px;
     }
@@ -81,7 +81,7 @@ export default {
     transform: translate(-50%, -50%);
     color: #000;
     -webkit-animation-name: fadeInFromBellow;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 3.5s;
     .s-web {
       font-size: 50px;
     }

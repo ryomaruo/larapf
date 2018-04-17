@@ -31,16 +31,18 @@
         let y2 = [];
         let times = 1;
         let w = $(window).width();
+//        let w = 400
+        let h = $(window).height();
+
 
         p.setup = _ => {
-          this.canvas = p.createCanvas(w, 600);
+          this.canvas = p.createCanvas(w, h);
           this.canvas.parent(this.$refs.crosscanv);
-          console.log(this.canvas);
           p.noLoop();
           x[0] = 0;
           y[0] = 0;
           x2[0] = 0;
-          y2[0] = 600;
+          y2[0] = h;
         }
 
         p.draw = _ => {
@@ -53,7 +55,7 @@
               }
               var speed = [];
               speed[0] = p.random(0, 5);
-              speed[1] = 600 / w * speed[0] + p.random(1, -1);
+              speed[1] = h / w * speed[0] + p.random(1, -1);
               x[times] = x[times - 1] + speed[0];
               y[times] = y[times - 1] + speed[1];
               x2[times] = x2[times - 1] + speed[0];
@@ -134,14 +136,11 @@
         this.showDevidedSection();
         var promise = this.execDivide('lightbar');
         promise.done(function() {
-          console.log('done1!');
           var promise2 = self.execDivide('lightbar2');
           var promise_main = promise2.done(function() {
-            console.log('done2!');
             self.execDivide('main');
           })
           promise_main.done(function() {
-            console.log('done main!');
             defer.resolve();
           })
         })
@@ -164,20 +163,26 @@
         var defer = $.Deferred();
         var i = 0;
         var id = setInterval(function() {
-          if (i == 30) {
-            console.log(lightbar);
-            console.log($('.divided-section .' + lightbar)
-              .closest('.section-clipper'));
-            console.log('resolved!');
+          if (i == 40) {
             defer.resolve();
           }
-          if (i > 110) {
+          if (lightbar == 'main' && i > 100) {
+            clearInterval(id);
+          } else if (i > 110) {
             clearInterval(id);
           }
-//          $('.main').css({
-//            border: 'solid #cc2110',
-//            borderWidth: '0px 4px'
-//          })
+          if (lightbar == 'main') {
+            $('.divided-section .' + lightbar)
+              .closest('.section-clipper')
+              .css({
+                zIndex: 2
+              });
+            $('.divided-section .' + lightbar)
+              .closest('.divided-section')
+              .css({
+                height: '2000px'
+              })
+          }
           $('.divided-section .' + lightbar)
             .closest('.section-clipper')
             .css({
@@ -191,12 +196,6 @@
   }
 </script>
 <style scoped lang="scss">
-  .center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
   .canvas-section {
     .sentence {
       width: 800px;
@@ -205,8 +204,8 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      font-size: 130px;
-      z-index: 99;
+      font-size: 90px;
+      z-index: 1;
     }
   }
 </style>

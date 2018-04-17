@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Hello Vue</title>
+    <title>Daiki</title>
     <link rel="stylesheet" href="css/app.css"/>
     <script type="text/javascript">
         window.Laravel = window.Laravel || {};
@@ -12,6 +12,7 @@
 <body>
 <div id="app">
   <div id="container">
+    <skip-button></skip-button>
     <div class="sections">
       <my_section tmpl_name="hello"></my_section>
       <my_section tmpl_name="p5canvas"></my_section>
