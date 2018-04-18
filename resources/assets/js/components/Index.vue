@@ -34,33 +34,16 @@
         let w = $(window).width();
 
         p.setup = _ => {
-          this.canvas = p.createCanvas(600, 600);
+          this.canvas = p.createCanvas(600, 600, p.WEBGL);
           this.canvas.parent(this.$refs.geocanv);
-          console.log(this.canvas);
           p.noLoop();
         }
 
         p.draw = _ => {
           p.background(0);
-          p.noStroke();
-
-          p.fill(204);
-          p.triangle(18, 18, 18, 360, 81, 360);
-
-          p.fill(102);
-          p.rect(81, 81, 63, 63);
-
-          p.fill(204);
-          p.quad(189, 18, 216, 18, 216, 360, 144, 360);
-
-          p.fill(255);
-          p.ellipse(252, 144, 72, 72);
-
-          p.fill(204);
-          p.triangle(288, 18, 351, 360, 288, 360); 
-
-          p.fill(255);
-          p.arc(479, 300, 280, 280, p.PI, p.TWO_PI);
+          p.translate(100, 100);    //立体の中心を画面中央に移動
+          p.rotateY(p.radians(60));    //Y軸に対して60度回転
+          p.box(150, 150, 150);    //150 x 150 x 150pxの立方体を描画
         }
       }
       this.ps = new p5(this.sketch);
@@ -70,10 +53,10 @@
 <style scoped lang="scss">
 .main {
   width: 100%;
-  height: 1000px;
+  height: 100%;
   background: #000;
-  box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;
-  -webkit-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;
-  -moz-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;
+  box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;
+  -webkit-box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;
+  -moz-box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;
 }
 </style>

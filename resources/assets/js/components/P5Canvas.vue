@@ -31,8 +31,8 @@
         let y2 = [];
         let times = 1;
         let w = $(window).width();
-//        let w = 400
-        let h = $(window).height();
+        let h = 600;
+//        let h = $(window).height();
 
 
         p.setup = _ => {
@@ -72,7 +72,7 @@
                 }
               }
               times++;
-            }, 25);
+            }, 10);
             return defer;
           }
           var promise = draw();
@@ -133,7 +133,6 @@
       },
       divideCanvas: function(defer) {
         var self = this;
-        this.showDevidedSection();
         var promise = this.execDivide('lightbar');
         promise.done(function() {
           var promise2 = self.execDivide('lightbar2');
@@ -145,51 +144,39 @@
           })
         })
       },
-      showDevidedSection: function() {
-        $('.divided-section')
-          .css({
-            display: 'block'
-          })
-        $('.cell-left')
-          .css({
-            display: 'block'
-          })
-        $('.cell-right')
+      showDevidedSection: function(lightbar) {
+        $('.' + lightbar)
+          .closest('.divided-section')
           .css({
             display: 'block'
           })
       },
       execDivide: function(lightbar) {
-        var defer = $.Deferred();
-        var i = 0;
-        var id = setInterval(function() {
-          if (i == 40) {
-            defer.resolve();
-          }
-          if (lightbar == 'main' && i > 100) {
-            clearInterval(id);
-          } else if (i > 110) {
-            clearInterval(id);
-          }
-          if (lightbar == 'main') {
-            $('.divided-section .' + lightbar)
-              .closest('.section-clipper')
-              .css({
-                zIndex: 2
-              });
-            $('.divided-section .' + lightbar)
-              .closest('.divided-section')
-              .css({
-                height: '2000px'
-              })
-          }
+        console.log(lightbar)
+        this.showDevidedSection(lightbar);
+        if (lightbar == 'main') {
           $('.divided-section .' + lightbar)
             .closest('.section-clipper')
             .css({
-              width: i + '%'
-            })
+              zIndex: 2
+            });
+        }
+        var defer = $.Deferred();
+        var i = 0;
+        var id  = setInterval(function() {
+          console.log(i)
+          if (i == 5) {
+            clearInterval(id);
+            defer.resolve();
+          }
           i++;
-        }, 30);
+        }, 100);
+        $('.divided-section .' + lightbar)
+            .closest('.section-clipper')
+            .css({
+              '-webkit-animation-name': 'exp-from-center',
+              '-webkit-animation-duration': '6s'
+            });
         return defer;
       }
     }

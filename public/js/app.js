@@ -43714,7 +43714,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  methods: {
+    test: function test(e) {
+      var i = 0;
+      var id = setInterval(function () {
+        console.log(i);
+        if (i > 110) {
+          clearInterval(id);
+        }
+        $('.divided-section .main').closest('.divided-section').css({
+          display: 'block'
+        });
+        $('.divided-section .main').closest('.section-clipper').css({
+          zIndex: 2
+        });
+        $('.divided-section .main').closest('.section-clipper').css({
+          '-webkit-animation-name': 'exp-from-center',
+          '-webkit-animation-duration': '6s'
+        });
+        i++;
+      }, 20);
+    }
+  }
 });
 
 /***/ }),
@@ -43725,18 +43746,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "skip-button" }, [
-      _c("button", { attrs: { id: "skip-button" } }, [_vm._v("Skip >>")])
+  return _c("div", { staticClass: "skip-button" }, [
+    _c("button", { attrs: { id: "skip-button" }, on: { click: _vm.test } }, [
+      _vm._v("Skip >>")
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -44222,8 +44238,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var y2 = [];
       var times = 1;
       var w = $(window).width();
-      //        let w = 400
-      var h = $(window).height();
+      var h = 600;
+      //        let h = $(window).height();
+
 
       p.setup = function (_) {
         _this.canvas = p.createCanvas(w, h);
@@ -44262,7 +44279,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               }
             }
             times++;
-          }, 25);
+          }, 10);
           return defer;
         };
         var promise = draw();
@@ -44321,7 +44338,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     divideCanvas: function divideCanvas(defer) {
       var self = this;
-      this.showDevidedSection();
       var promise = this.execDivide('lightbar');
       promise.done(function () {
         var promise2 = self.execDivide('lightbar2');
@@ -44333,42 +44349,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       });
     },
-    showDevidedSection: function showDevidedSection() {
-      $('.divided-section').css({
-        display: 'block'
-      });
-      $('.cell-left').css({
-        display: 'block'
-      });
-      $('.cell-right').css({
+    showDevidedSection: function showDevidedSection(lightbar) {
+      $('.' + lightbar).closest('.divided-section').css({
         display: 'block'
       });
     },
     execDivide: function execDivide(lightbar) {
+      console.log(lightbar);
+      this.showDevidedSection(lightbar);
+      if (lightbar == 'main') {
+        $('.divided-section .' + lightbar).closest('.section-clipper').css({
+          zIndex: 2
+        });
+      }
       var defer = $.Deferred();
       var i = 0;
       var id = setInterval(function () {
-        if (i == 40) {
+        console.log(i);
+        if (i == 5) {
+          clearInterval(id);
           defer.resolve();
         }
-        if (lightbar == 'main' && i > 100) {
-          clearInterval(id);
-        } else if (i > 110) {
-          clearInterval(id);
-        }
-        if (lightbar == 'main') {
-          $('.divided-section .' + lightbar).closest('.section-clipper').css({
-            zIndex: 2
-          });
-          $('.divided-section .' + lightbar).closest('.divided-section').css({
-            height: '2000px'
-          });
-        }
-        $('.divided-section .' + lightbar).closest('.section-clipper').css({
-          width: i + '%'
-        });
         i++;
-      }, 30);
+      }, 100);
+      $('.divided-section .' + lightbar).closest('.section-clipper').css({
+        '-webkit-animation-name': 'exp-from-center',
+        '-webkit-animation-duration': '6s'
+      });
       return defer;
     }
   }
@@ -44522,7 +44529,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.divided-section[data-v-20e01a51] {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n.divided-section .cell-left[data-v-20e01a51],\n  .divided-section .cell-right[data-v-20e01a51] {\n    display: none;\n    position: absolute;\n    top: 0;\n    width: 50%;\n    height: 100%;\n}\n.divided-section .cell-left[data-v-20e01a51] {\n    left: 0;\n}\n.divided-section .cell-right[data-v-20e01a51] {\n    left: 50%;\n}\n.divided-section .section-clipper[data-v-20e01a51] {\n    width: 0%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 50%;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    clip: rect(auto, auto, auto, auto);\n    -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-fixed .section-content[data-v-20e01a51] {\n  position: fixed;\n}\n.section[data-v-20e01a51] {\n  position: relative;\n}\n.section-clipper[data-v-20e01a51], .section-content[data-v-20e01a51] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n", ""]);
+exports.push([module.i, "\n.divided-section[data-v-20e01a51] {\n  display: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n.divided-section .cell-left[data-v-20e01a51],\n  .divided-section .cell-right[data-v-20e01a51] {\n    display: none;\n    position: absolute;\n    top: 0;\n    width: 50%;\n    height: 100%;\n}\n.divided-section .cell-left[data-v-20e01a51] {\n    left: 0;\n}\n.divided-section .cell-right[data-v-20e01a51] {\n    left: 50%;\n}\n.divided-section .section-clipper[data-v-20e01a51] {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n    top: 0;\n    left: 50%;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    clip: rect(auto, auto, auto, auto);\n    -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-fixed .section-content[data-v-20e01a51] {\n  position: fixed;\n}\n.section[data-v-20e01a51] {\n  position: relative;\n}\n.section-clipper[data-v-20e01a51], .section-content[data-v-20e01a51] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n", ""]);
 
 // exports
 
@@ -44639,7 +44646,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.lightbar[data-v-20f551d4],\n.lightbar2[data-v-20f551d4] {\n  width: 100%;\n  height: 100%;\n  box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n  -webkit-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n  -moz-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n}\n", ""]);
+exports.push([module.i, "\n.lightbar[data-v-20f551d4],\n.lightbar2[data-v-20f551d4] {\n  width: 100%;\n  height: 100%;\n}\n.lightbar[data-v-20f551d4] {\n  box-shadow: #de4375 90px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #de4375 90px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -moz-box-shadow: #de4375 90px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n}\n.lightbar2[data-v-20f551d4] {\n  box-shadow: #9b50a0 90px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #9b50a0 90px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n  -moz-box-shadow: #9b50a0 90px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n}\n", ""]);
 
 // exports
 
@@ -44766,7 +44773,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.main[data-v-1742f82b] {\n  width: 100%;\n  height: 1000px;\n  background: #000;\n  box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n  -webkit-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n  -moz-box-shadow: #cc2110 10px 0px 150px 0px inset, #cc2110 -10px 0 150px 0px inset, #cc2110 0 0 150px 0;\n}\n", ""]);
+exports.push([module.i, "\n.main[data-v-1742f82b] {\n  width: 100%;\n  height: 100%;\n  background: #000;\n  box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;\n  -moz-box-shadow: #446c84 90px 0px 100px -50px inset, #446c84 -140px 0 100px -100px inset;\n}\n", ""]);
 
 // exports
 
@@ -44815,33 +44822,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var w = $(window).width();
 
       p.setup = function (_) {
-        _this.canvas = p.createCanvas(600, 600);
+        _this.canvas = p.createCanvas(600, 600, p.WEBGL);
         _this.canvas.parent(_this.$refs.geocanv);
-        console.log(_this.canvas);
         p.noLoop();
       };
 
       p.draw = function (_) {
         p.background(0);
-        p.noStroke();
-
-        p.fill(204);
-        p.triangle(18, 18, 18, 360, 81, 360);
-
-        p.fill(102);
-        p.rect(81, 81, 63, 63);
-
-        p.fill(204);
-        p.quad(189, 18, 216, 18, 216, 360, 144, 360);
-
-        p.fill(255);
-        p.ellipse(252, 144, 72, 72);
-
-        p.fill(204);
-        p.triangle(288, 18, 351, 360, 288, 360);
-
-        p.fill(255);
-        p.arc(479, 300, 280, 280, p.PI, p.TWO_PI);
+        p.translate(100, 100); //立体の中心を画面中央に移動
+        p.rotateY(p.radians(60)); //Y軸に対して60度回転
+        p.box(150, 150, 150); //150 x 150 x 150pxの立方体を描画
       };
     };
     this.ps = new p5(this.sketch);
