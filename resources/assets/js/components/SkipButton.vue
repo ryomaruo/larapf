@@ -66,7 +66,7 @@
 }
 .skip-button {
   position: absolute;
-  top: 5%;
+  top: 20px;
   right: 5%;
   z-index: 2;
   -webkit-animation-name: fadeInSkipBtn;

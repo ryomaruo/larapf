@@ -33,23 +33,35 @@
         p.setup = _ => {
           this.canvas = p.createCanvas(w, h, p.WEBGL);
           this.canvas.parent(this.$refs.linebox);
+          p.strokeWeight(1);
         }
 
+        let obj_size = 300;
+        let growing = 1;
+
         p.draw = _ => {
-          p.push();
+          p.background(0);
           p.noFill();
-          p.stroke(255);
-          p.translate(0, 0);
-          p.rotateY(p.frameCount / 200.0);
-          p.box(300);
+          p.stroke(50, 100);
+          p.push();
+          p.translate(-150, -150);
+          p.rotateY(p.frameCount / 500.0);
+          p.box(100);
           p.pop();
 
           p.noFill();
-          p.stroke(255);
+          p.stroke(50, 100);
           p.push();
-          p.translate(500, h*0.35, -200);
-          p.sphere(300);
+          p.translate(150, 150);
+          p.sphere(100);
           p.pop();
+
+          obj_size += growing;
+
+          if (obj_size < 200 || obj_size > 300) {
+            growing = -growing;
+          }
+          times++;
         }
       }
       this.ps = new p5(this.sketch);

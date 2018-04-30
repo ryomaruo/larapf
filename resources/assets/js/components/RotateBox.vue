@@ -33,7 +33,7 @@
         p.setup = _ => {
           this.canvas = p.createCanvas(w, h, p.WEBGL);
           this.canvas.parent(this.$refs.rotatebox);
-          p.strokeWeight(0.5);
+          p.strokeWeight(1);
         }
 
         let obj_size = 300;
@@ -42,18 +42,18 @@
         p.draw = _ => {
           p.background(0);
           p.noFill();
-          p.stroke(255);
+          p.stroke(128, 100);
           p.push();
           p.translate(-150, -150);
-          p.rotateY(p.frameCount / 200.0);
-          p.box(obj_size);
+          p.rotateY(p.frameCount / 500.0);
+          p.box(100);
           p.pop();
 
           p.noFill();
-          p.stroke(255);
+          p.stroke(128, 100);
           p.push();
           p.translate(150, 150);
-          p.sphere(obj_size);
+          p.sphere(100);
           p.pop();
 
           obj_size += growing;
@@ -62,6 +62,36 @@
             growing = -growing;
           }
           times++;
+
+          c   = document.getElementById("canvas__bg"),
+          $   = c.getContext("2d"),
+          col = function (e, n, t, o, r) {
+              $.fillStyle = "rgb(" + t + "," + o + "," + r + ")",
+              $.fillRect(e, n, 1, 1)
+          },
+          R   = function (e, n, t) {
+              return Math.floor(130 + 64 * Math.cos((e * e - n * n) / 300 + t))
+          },
+          G   = function (e, n, t) {
+              return Math.floor(
+                  0 + 64 * Math.sin((e * e * Math.cos(t / 4) + n * n * Math.sin(t / 3)) / 300)
+              )
+          },
+          B   = function (e, n, t) {
+              return Math.floor(
+                  250 + 64 * Math.sin(5 * Math.sin(t / 9) + ((e - 100) * (e - 100) + (n - 100) * (n - 100)) / 1100)
+              )
+          },
+          t   = 0,
+          run = function () {
+            for (x = 0; x <= 35; x++) {
+              for (y = 0; y <= 35; y++) {
+                col(x, y, R(x, y, t), G(x, y, t), B(x, y, t));
+              }
+            }
+          }
+          t += .03,
+          window.requestAnimationFrame(run)
         }
       }
       this.ps = new p5(this.sketch);

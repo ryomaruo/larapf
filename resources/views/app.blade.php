@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Daiki</title>
     <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/reset.css"/>
     <script type="text/javascript">
         window.Laravel = window.Laravel || {};
         window.Laravel.csrfToken = "{{csrf_token()}}";
@@ -13,7 +14,6 @@
 <div id="app">
   <div id="container">
     <navbg></navbg>
-    <skip-button></skip-button>
     <div class="sections">
       <my_section tmpl_name="hello" is_outer="true"></my_section>
       <my_section tmpl_name="p5canvas" is_expand="true" is_outer="true"></my_section>
