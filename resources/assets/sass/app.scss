@@ -25,7 +25,24 @@ body {
 .sections {
   position: relative;
 }
-
+.works-section {
+  width: 80%;
+  height: 100%;
+  background: #000;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  -webkit-animation-name: exp-work-section;
+  -webkit-animation-duration: 6s;
+  & .section {
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
+}
 @-webkit-keyframes expand {
   0% {
     width: 100%;
@@ -46,27 +63,45 @@ body {
     height: 100%;
     position: absolute !important;
     top: 0;
-    left: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 
   100% {
     width: 100%;
     height: 100%;
     top: 0;
-    left: 50%;
+    left: 0;
+    right: 0;
+    margin:0 auto;
   }
 }
-.section:nth-child(2) {
-  position: absolute !important;
-  top: 0;
-  -webkit-animation-name: expand;
-  -webkit-animation-duration: 10s;
+
+@-webkit-keyframes exp-work-section {
+  0% {
+    width: 0px;
+    height: 100%;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  100% {
+    width: 90%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+  }
 }
 
 /* vvv  util  vvv */
-
 .center {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

@@ -12,19 +12,23 @@
 <body>
 <div id="app">
   <div id="container">
+    <navbg></navbg>
     <skip-button></skip-button>
     <div class="sections">
-      <my_section tmpl_name="hello"></my_section>
-      <my_section tmpl_name="p5canvas"></my_section>
+      <my_section tmpl_name="hello" is_outer="true"></my_section>
+      <my_section tmpl_name="p5canvas" is_expand="true" is_outer="true"></my_section>
       <divided-section tmpl_name="lightbar" class_name="lightbar"></divided-section>
       <divided-section tmpl_name="lightbar" class_name="lightbar2"></divided-section>
-      <divided-section tmpl_name="index" class_name="main"></divided-section>
+    </div>
+    <div class="sections works-section">
+      <my_section tmpl_name="rotatebox" is_inner="true"></my_section>
+      <my_section tmpl_name="linebox" is_inner="true"></my_section>
     </div>
   </div>
 </div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/p5.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.dom.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/91/three.min.js"></script>
 <script src="js/app.js"></script>
 </body>

@@ -21,6 +21,7 @@ require('./bootstrap');
 const app = new Vue({
     el: '#app',
     components: {
+      'navbg': require('./components/NavBG.vue'),
       'skip-button': require('./components/SkipButton.vue'),
       'my_section': require('./components/MySection.vue'),
       'p5canvas': require('./components/P5Canvas.vue'),

@@ -1,5 +1,5 @@
 <template>
-  <div class="canvas-section">
+  <div class="fixed-canvas-area">
     <div class="center">
       <div ref="crosscanv"></div>
     </div>
@@ -117,9 +117,9 @@
         return false;
       },
       changeCanvasStr: function() {
-        $('.canvas-section .sentence:hover')
+        $('.fixed-canvas-area .sentence:hover')
           .addClass('pointer');
-        $('.canvas-section .sentence')
+        $('.fixed-canvas-area .sentence')
           .css({
               background: 'linear-gradient(45deg, #221884 0, #be3679 50%, #ffa458 100%)',
               padding: '10px 0'
@@ -152,20 +152,19 @@
           })
       },
       execDivide: function(lightbar) {
-        console.log(lightbar)
-        this.showDevidedSection(lightbar);
         if (lightbar == 'main') {
-          $('.divided-section .' + lightbar)
-            .closest('.section-clipper')
+          $('.sections.works-section')
             .css({
+              display: 'block',
               zIndex: 2
             });
+        } else {
+          this.showDevidedSection(lightbar);
         }
         var defer = $.Deferred();
         var i = 0;
         var id  = setInterval(function() {
-          console.log(i)
-          if (i == 5) {
+          if (i == 3) {
             clearInterval(id);
             defer.resolve();
           }
@@ -175,7 +174,7 @@
             .closest('.section-clipper')
             .css({
               '-webkit-animation-name': 'exp-from-center',
-              '-webkit-animation-duration': '6s'
+              '-webkit-animation-duration': '4s'
             });
         return defer;
       }
@@ -183,16 +182,20 @@
   }
 </script>
 <style scoped lang="scss">
-  .canvas-section {
-    .sentence {
-      width: 800px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      font-size: 90px;
-      z-index: 1;
-    }
+.fixed-canvas-area {
+  position: absolute !important;
+  top: 0;
+  width:100%;
+  height: 100%;
+  .sentence {
+    width: 800px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 90px;
+    z-index: 1;
   }
+}
 </style>
