@@ -17,11 +17,14 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+export const eventHub = new Vue(); //コンポーネント間データ受け渡しのため、イベントハブをインスタンス化しておく。
 
 const app = new Vue({
     el: '#app',
     components: {
-      'navbg': require('./components/NavBG.vue'),
+      'clicked-circle': require('./components/ClickedCircle.vue'),
+      'menu-btn': require('./components/MenuBtn.vue'),
+      'menu-content': require('./components/MenuContent.vue'),
       'skip-button': require('./components/SkipButton.vue'),
       'my_section': require('./components/MySection.vue'),
       'p5canvas': require('./components/P5Canvas.vue'),

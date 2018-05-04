@@ -1,9 +1,7 @@
 <template>
   <div class="section" :class="{'expand-section': is_expand}">
     <div class="section-clipper">
-      <div class="section-content" :class="{'inner-content': is_inner,'outer-content': is_outer}">
-        <component :is="tmpl_name"></component>
-      </div>
+      <component :is="tmpl_name"></component>
     </div>
   </div>
 </template>
@@ -11,15 +9,13 @@
   export default {
     props: [
       'tmpl_name',
-      'is_expand',
-      'is_outer',
-      'is_inner'
+      'is_expand'
     ],
     components: {
      'hello': require('./Hello.vue'),
      'p5canvas': require('./P5Canvas.vue'),
-     'rotatebox':require('./RotateBox.vue'),
-     'linebox':require('./LineBox.vue')
+     'rotatebox':require('./works/RotateBox.vue'),
+     'staygreen':require('./works/StayGreen.vue')
     }
   }
 </script>

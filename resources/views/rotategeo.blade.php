@@ -13,21 +13,14 @@
 <body>
 <div id="app">
   <div id="container">
-    <clicked-circle></clicked-circle>
-    <skip-button></skip-button>
-    <!-- <nav-content content="about"></nav-content>
-    <nav-content content="works"></nav-content>
-    <nav-content content="skill"></nav-content> -->
     <div class="sections">
-      <my_section tmpl_name="hello"></my_section>
-      <my_section tmpl_name="p5canvas" is_expand="true"></my_section>
+      <my_section tmpl_name="hello" is_outer="true"></my_section>
+      <my_section tmpl_name="p5canvas" is_expand="true" is_outer="true"></my_section>
       <divided-section tmpl_name="lightbar" class_name="lightbar"></divided-section>
       <divided-section tmpl_name="lightbar" class_name="lightbar2"></divided-section>
     </div>
     <div class="sections works-section">
-      <menu-btn></menu-btn>
-      <menu-content></menu-content>
-      <my_section tmpl_name="rotatebox"></my_section>
+      <my_section tmpl_name="rotatebox" is_inner="true"></my_section>
     </div>
   </div>
 </div>

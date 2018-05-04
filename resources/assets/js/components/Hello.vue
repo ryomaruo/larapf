@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="section-content">
     <div class="text-center name-intro">
       <div class="s-im">
         <span>I'm</span>
@@ -28,7 +28,6 @@ export default {
     }
   },
   mounted() {
-    console.log('Component mounted.');
     if ($(".js-3dheader").length>0 && $(".js-3dheader").outerWidth() > 640) {
         var smallHeader = new SmallHeader($(".js-3dheader"));
     }

@@ -1,14 +1,17 @@
 <template>
-  <div class="fixed-canvas-area">
-    <div class="center">
-      <div ref="crosscanv"></div>
-    </div>
-    <div class="sentence">
-      <span>Check me</span>
+  <div class="section-content">
+    <div class="fixed-canvas-area">
+      <div class="center">
+        <div ref="crosscanv"></div>
+      </div>
+      <div class="sentence">
+        <span>Check me</span>
+      </div>
     </div>
   </div>
 </template>
 <script>
+  var eventHub = require("../app.js").eventHub;
   export default {
     data: function () {
       return {
@@ -21,6 +24,7 @@
       }
     },
     mounted() {
+      console.log(eventHub);
       let self = this;
       this.sketch = p => {
         this.x = 100
@@ -32,8 +36,6 @@
         let times = 1;
         let w = $(window).width();
         let h = 600;
-//        let h = $(window).height();
-
 
         p.setup = _ => {
           this.canvas = p.createCanvas(w, h);
@@ -96,14 +98,6 @@
 
           var open_promise = openDevided(promise);
           open_promise.done(function() {
-            var i = 0;
-            var id = setInterval(function() {
-              var main_w = self.half_w - i * self.half_w / 100;
-              if (i == 90) {
-                clearInterval(id);
-              }
-              i++;
-            }, 30);
           })
         }
       },
@@ -132,6 +126,7 @@
         })
       },
       divideCanvas: function(defer) {
+//        this.addZindexToNav();
         var self = this;
         var promise = this.execDivide('lightbar');
         promise.done(function() {
@@ -140,6 +135,7 @@
             self.execDivide('main');
           })
           promise_main.done(function() {
+            eventHub.$emit('displayMenuContent');
             defer.resolve();
           })
         })
@@ -178,6 +174,12 @@
             });
         return defer;
       }
+//      addZindexToNav: _ => {
+//        $('.nav-bg')
+//          .css({
+//            zIndex: 3
+//          });
+//      },
     }
   }
 </script>

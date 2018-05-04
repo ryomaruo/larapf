@@ -11,18 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('/', 'AppController@app')->name('app');
+
+Route::get('/works/rotategeo', 'WorksController@rotategeo')->name('rotategeo');
+
+Route::get('/works/staygreen', 'WorksController@staygreen')->name('staygreen');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

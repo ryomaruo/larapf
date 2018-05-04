@@ -1,6 +1,5 @@
 <template>
   <div class="nav-bg">
-    <skip-button></skip-button>
     <ul class="nav-lists">
       <li class="nav-item about">
         <a href="#">About</a>
@@ -55,7 +54,6 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 3;
 }
 .nav-lists {
   margin: 0;

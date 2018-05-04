@@ -4,9 +4,11 @@
   </div>
 </template>
 <script>
+var eventHub = require("../app.js").eventHub;
   export default {
     methods: {
       showMain: function (e) {
+//        this.addZindexToNav()
         var self = this;
         var promise = this.execDivide('lightbar');
         promise.done(function() {
@@ -14,8 +16,19 @@
           var promise_main = promise2.done(function() {
             self.execDivide('main');
           })
+          promise_main.done(function() {
+            setTimeout(function() { //works-sectionが表示されるまでに6秒かかるので、遅延させる。
+              eventHub.$emit('displayMenuContent');
+            }, 6000)
+          })
         })
       },
+//      addZindexToNav: _ => {
+//        $('.nav-bg')
+//          .css({
+//            zIndex: 3
+//          });
+//      },
       execDivide: function(lightbar) {
         if (lightbar == 'main') {
           $('.sections.works-section')
@@ -59,14 +72,14 @@
     position: absolute;
     top: 0;
     right: 5%;
-    ilter: alpha(opacity=0);
+    filter: alpha(opacity=0);
     -moz-opacity:0;
     opacity:0;
   }
 }
 .skip-button {
   position: absolute;
-  top: 20px;
+  top: 15px;
   right: 5%;
   z-index: 2;
   -webkit-animation-name: fadeInSkipBtn;
