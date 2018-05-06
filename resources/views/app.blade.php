@@ -15,6 +15,8 @@
   <div id="container">
     <clicked-circle></clicked-circle>
     <skip-button></skip-button>
+    <menu-btn></menu-btn>
+    <my_section tmpl_name="menu-content" is_menu="true" url="{{ $url }}"></my_section>
     <!-- <nav-content content="about"></nav-content>
     <nav-content content="works"></nav-content>
     <nav-content content="skill"></nav-content> -->
@@ -25,8 +27,6 @@
       <divided-section tmpl_name="lightbar" class_name="lightbar2"></divided-section>
     </div>
     <div class="sections works-section">
-      <menu-btn></menu-btn>
-      <menu-content></menu-content>
       <my_section tmpl_name="rotatebox"></my_section>
     </div>
   </div>

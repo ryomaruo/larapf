@@ -23,6 +23,10 @@ class AppController extends Controller
      */
     public function app()
     {
-        return view('app');
+        $url = [
+            'works' => route('works')
+        ];
+        $url = json_encode($url);
+        return view('app')->with('url', $url);
     }
 }

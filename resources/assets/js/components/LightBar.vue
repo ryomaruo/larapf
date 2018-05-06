@@ -20,9 +20,9 @@
   -moz-box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;
 }
 .lightbar2 {
-  box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;
-  -webkit-box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;
-  -moz-box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;
+  box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;
+  -webkit-box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;
+  -moz-box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;
   background-color: #000;
 }
 </style>

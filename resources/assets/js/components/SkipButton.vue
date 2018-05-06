@@ -18,7 +18,7 @@ var eventHub = require("../app.js").eventHub;
           })
           promise_main.done(function() {
             setTimeout(function() { //works-sectionが表示されるまでに6秒かかるので、遅延させる。
-              eventHub.$emit('displayMenuContent');
+              eventHub.$emit('enableMenuContent');
             }, 6000)
           })
         })

@@ -18,7 +18,7 @@
         x: 0,
         y: 0,
         canvas: null,
-        isFill: true,
+        isFill: false,
         half_w: $(window).width() / 2
       }
     },
@@ -45,6 +45,7 @@
           this.canvas.parent(this.$refs.rotatebox);
           p.frameRate(10);
           p.strokeWeight(1);
+          p.colorMode(p.RGB, 255, 255, 255, 1);
         }
 
         let obj_size = 100;
@@ -52,30 +53,32 @@
 
         p.draw = _ => {
           p.background(0);
+          r = p.random(255);
+          g = p.random(255);
+          b = p.random(255);
           if (this.isFill === true) {
-            r = p.random(255);
-            g = p.random(255);
-            b = p.random(255);
             p.noStroke();
-            p.fill(r, g, b, 50);
+            p.fill(r, g, b, 0.5);
           } else {
             p.noFill();
-            p.stroke(p.random(255), p.random(255), p.random(255), 50);
+            var c = p.color(r, g, b, 0.5);
+            p.stroke(c);
           }
           p.push();
           p.translate(-150, -150);
           p.rotateY(p.frameCount / 500.0);
           p.box(obj_size);
           p.pop();
+          r = p.random(255);
+          g = p.random(255);
+          b = p.random(255);
           if (this.isFill === true) {
-            r = p.random(255);
-            g = p.random(255);
-            b = p.random(255);
             p.noStroke();
-            p.fill(r, g, b, 50);
+            p.fill(r, g, b, 0.5);
           } else {
             p.noFill();
-            p.stroke(p.random(255), p.random(255), p.random(255), 50);
+            var c = p.color(r, g, b, 0.5);
+            p.stroke(c);
           }
           p.push();
           p.translate(150, 150);

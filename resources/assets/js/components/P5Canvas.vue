@@ -24,7 +24,6 @@
       }
     },
     mounted() {
-      console.log(eventHub);
       let self = this;
       this.sketch = p => {
         this.x = 100
@@ -135,7 +134,9 @@
             self.execDivide('main');
           })
           promise_main.done(function() {
-            eventHub.$emit('displayMenuContent');
+            setTimeout(function() { //works-sectionが開くのを待って、6秒間遅延。
+              eventHub.$emit('enableMenuContent');
+            }, 6000)
             defer.resolve();
           })
         })

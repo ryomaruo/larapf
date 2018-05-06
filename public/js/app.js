@@ -12536,7 +12536,6 @@ __webpack_require__(20);
  */
 
 var eventHub = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(); //コンポーネント間データ受け渡しのため、イベントハブをインスタンス化しておく。
-
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   el: '#app',
   components: {
@@ -43881,7 +43880,7 @@ var eventHub = __webpack_require__(17).eventHub;
         promise_main.done(function () {
           setTimeout(function () {
             //works-sectionが表示されるまでに6秒かかるので、遅延させる。
-            eventHub.$emit('displayMenuContent');
+            eventHub.$emit('enableMenuContent');
           }, 6000);
         });
       });
@@ -44043,7 +44042,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.section-content.outer-content[data-v-01004a1c] {\n  position: fixed;\n  height: 100%;\n}\n.section-content.inner-content[data-v-01004a1c] {\n  height: 100%;\n}\n.section[data-v-01004a1c] {\n  position: relative;\n}\n.section-clipper[data-v-01004a1c] {\n  clip: rect(auto, auto, auto, auto);\n  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-clipper[data-v-01004a1c], .section-content[data-v-01004a1c] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n.expand-section[data-v-01004a1c] {\n  position: absolute !important;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-animation-name: expand;\n  -webkit-animation-duration: 10s;\n}\n", ""]);
+exports.push([module.i, "\n.section-content.outer-content[data-v-01004a1c] {\n  position: fixed;\n  height: 100%;\n}\n.section-content.inner-content[data-v-01004a1c] {\n  height: 100%;\n}\n.section[data-v-01004a1c] {\n  position: relative;\n}\n.section.menu-section[data-v-01004a1c] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: var(--menu-width);\n    height: 100%;\n    z-index: 3;\n    -webkit-transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n}\n.section-clipper[data-v-01004a1c] {\n  clip: rect(auto, auto, auto, auto);\n  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-clipper[data-v-01004a1c], .section-content[data-v-01004a1c] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n.expand-section[data-v-01004a1c] {\n  position: absolute !important;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-animation-name: expand;\n  -webkit-animation-duration: 10s;\n}\n", ""]);
 
 // exports
 
@@ -44062,13 +44061,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+var eventHub = __webpack_require__(17).eventHub;
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tmpl_name', 'is_expand'],
+  props: {
+    'tmpl_name': {},
+    'is_expand': {},
+    'is_menu': {},
+    'url': {
+      default: function _default() {
+        return {};
+      }
+    }
+  },
+  data: function data() {
+    return {
+      menuStyleObj: {
+        '--menu-width': '0'
+      }
+    };
+  },
   components: {
     'hello': __webpack_require__(57),
     'p5canvas': __webpack_require__(15),
+    'menu-content': __webpack_require__(135),
     'rotatebox': __webpack_require__(105),
     'staygreen': __webpack_require__(115)
+  },
+  created: function created() {
+    eventHub.$on('showMenu', this.showMenu);
+    eventHub.$on('closeMenu', this.closeMenu);
+  },
+  methods: {
+    showMenu: function showMenu() {
+      this.menuStyleObj = {
+        '--menu-width': '100%'
+      };
+    },
+    closeMenu: function closeMenu() {
+      this.menuStyleObj = {
+        '--menu-width': '0'
+      };
+    }
   }
 });
 
@@ -44476,7 +44509,6 @@ var eventHub = __webpack_require__(17).eventHub;
   mounted: function mounted() {
     var _this = this;
 
-    console.log(eventHub);
     var self = this;
     this.sketch = function (p) {
       _this.x = 100;
@@ -44584,7 +44616,10 @@ var eventHub = __webpack_require__(17).eventHub;
           self.execDivide('main');
         });
         promise_main.done(function () {
-          eventHub.$emit('displayMenuContent');
+          setTimeout(function () {
+            //works-sectionが開くのを待って、6秒間遅延。
+            eventHub.$emit('enableMenuContent');
+          }, 6000);
           defer.resolve();
         });
       });
@@ -44682,12 +44717,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "section", class: { "expand-section": _vm.is_expand } },
+    {
+      staticClass: "section",
+      class: { "expand-section": _vm.is_expand, "menu-section": _vm.is_menu },
+      style: _vm.menuStyleObj
+    },
     [
       _c(
         "div",
         { staticClass: "section-clipper" },
-        [_c(_vm.tmpl_name, { tag: "component" })],
+        [_c(_vm.tmpl_name, { tag: "component", attrs: { url: _vm.url } })],
         1
       )
     ]
@@ -44906,7 +44945,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.lightbar[data-v-20f551d4],\n.lightbar2[data-v-20f551d4] {\n  width: 100%;\n  height: 100%;\n}\n.lightbar[data-v-20f551d4] {\n  box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -moz-box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n}\n.lightbar2[data-v-20f551d4] {\n  box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;\n  -moz-box-shadow: #de3252 80px 0px 100px -50px inset, #de3252 -140px 0 100px -100px inset;\n  background-color: #000;\n}\n", ""]);
+exports.push([module.i, "\n.lightbar[data-v-20f551d4],\n.lightbar2[data-v-20f551d4] {\n  width: 100%;\n  height: 100%;\n}\n.lightbar[data-v-20f551d4] {\n  box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n  -moz-box-shadow: #de4375 80px 0px 100px -50px inset, #de4375 -140px 0 100px -100px inset;\n}\n.lightbar2[data-v-20f551d4] {\n  box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n  -webkit-box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n  -moz-box-shadow: #9b50a0 80px 0px 100px -50px inset, #9b50a0 -140px 0 100px -100px inset;\n  background-color: #000;\n}\n", ""]);
 
 // exports
 
@@ -45279,7 +45318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       x: 0,
       y: 0,
       canvas: null,
-      isFill: true,
+      isFill: false,
       half_w: $(window).width() / 2
     };
   },
@@ -45310,6 +45349,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.canvas.parent(_this.$refs.rotatebox);
         p.frameRate(10);
         p.strokeWeight(1);
+        p.colorMode(p.RGB, 255, 255, 255, 1);
       };
 
       var obj_size = 100;
@@ -45317,30 +45357,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       p.draw = function (_) {
         p.background(0);
+        r = p.random(255);
+        g = p.random(255);
+        b = p.random(255);
         if (_this.isFill === true) {
-          r = p.random(255);
-          g = p.random(255);
-          b = p.random(255);
           p.noStroke();
-          p.fill(r, g, b, 50);
+          p.fill(r, g, b, 0.5);
         } else {
           p.noFill();
-          p.stroke(p.random(255), p.random(255), p.random(255), 50);
+          var c = p.color(r, g, b, 0.5);
+          p.stroke(c);
         }
         p.push();
         p.translate(-150, -150);
         p.rotateY(p.frameCount / 500.0);
         p.box(obj_size);
         p.pop();
+        r = p.random(255);
+        g = p.random(255);
+        b = p.random(255);
         if (_this.isFill === true) {
-          r = p.random(255);
-          g = p.random(255);
-          b = p.random(255);
           p.noStroke();
-          p.fill(r, g, b, 50);
+          p.fill(r, g, b, 0.5);
         } else {
           p.noFill();
-          p.stroke(p.random(255), p.random(255), p.random(255), 50);
+          var c = p.color(r, g, b, 0.5);
+          p.stroke(c);
         }
         p.push();
         p.translate(150, 150);
@@ -45827,7 +45869,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n@-webkit-keyframes fadeInSkipBtn-data-v-0796f940 {\n0% {\n    position: absolute;\n    top: 0;\n    right: 5%;\n    filter: alpha(opacity=0);\n    -moz-opacity: 0;\n    opacity: 0;\n}\n}\n.change-color-button[data-v-0796f940] {\n  position: absolute;\n  top: 30px;\n  right: 5%;\n  width: 120px;\n  padding: 5px;\n  text-align: center;\n  vertical-align: middle;\n  color: #000;\n  border-radius: 2px;\n  border-color: #000;\n  background-color: #fff;\n  -webkit-animation-name: fadeInSkipBtn-data-v-0796f940;\n  -webkit-animation-duration: 2s;\n  z-index: 4;\n}\n.change-color-button span[data-v-0796f940] {\n    vertical-align: middle;\n}\n#change-color-button[data-v-0796f940] {\n  appearance: none;\n  -webkit-appearance: none;\n  -ms-appearance: none;\n  -moz-appearance: none;\n  position: relative;\n  margin: 10px;\n  width: 50px;\n  height: 15px;\n  border: 0px solid transparent;\n  border-radius: 10px;\n  background-color: #ddd;\n  vertical-align: middle;\n  -webkit-transition: background-color .4s ease;\n  transition: background-color .4s ease;\n}\n#change-color-button[data-v-0796f940]:checked {\n    background-color: #bbb;\n}\n#change-color-button[data-v-0796f940]::after, #change-color-button[data-v-0796f940]:checked::after {\n    content: '';\n    position: absolute;\n    top: 0;\n    width: 15px;\n    height: 15px;\n    border: 0px solid transparent;\n    border-radius: 50%;\n    background-color: #eee;\n    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);\n            box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);\n    -webkit-transition: left .4s ease, background-color .4s ease;\n    transition: left .4s ease, background-color .4s ease;\n}\n#change-color-button[data-v-0796f940]::after {\n    left: 0;\n}\n#change-color-button[data-v-0796f940]:checked::after {\n    left: 35px;\n}\n", ""]);
+exports.push([module.i, "\n@-webkit-keyframes fadeInSkipBtn-data-v-0796f940 {\n0% {\n    position: absolute;\n    top: 0;\n    right: 5%;\n    filter: alpha(opacity=0);\n    -moz-opacity: 0;\n    opacity: 0;\n}\n}\ninput[type=\"checkbox\"][data-v-0796f940]:focus {\n  outline: 0;\n}\n.change-color-button[data-v-0796f940] {\n  position: absolute;\n  top: 30px;\n  right: 5%;\n  width: 180px;\n  height: 40px;\n  padding: 5px;\n  text-align: center;\n  vertical-align: middle;\n  color: #000;\n  border-radius: 2px;\n  border-color: #000;\n  background-color: #fff;\n  -webkit-animation-name: fadeInSkipBtn-data-v-0796f940;\n  -webkit-animation-duration: 2s;\n  z-index: 4;\n}\n.change-color-button span[data-v-0796f940] {\n    position: absolute;\n    top: 50%;\n    left: 20px;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n}\n.toggle-container[data-v-0796f940] {\n  position: absolute;\n  top: 50%;\n  right: 20px;\n  -webkit-transform: translateY(-50%);\n          transform: translateY(-50%);\n}\n#change-color-button[data-v-0796f940] {\n  appearance: none;\n  -webkit-appearance: none;\n  -ms-appearance: none;\n  -moz-appearance: none;\n  position: relative;\n  margin: 10px;\n  width: 50px;\n  height: 15px;\n  border: 0px solid transparent;\n  border-radius: 10px;\n  background-color: #ddd;\n  vertical-align: middle;\n  -webkit-transition: background-color .4s ease;\n  transition: background-color .4s ease;\n}\n#change-color-button[data-v-0796f940]:checked {\n    background-color: #bbb;\n}\n#change-color-button[data-v-0796f940]::after, #change-color-button[data-v-0796f940]:checked::after {\n    content: '';\n    position: absolute;\n    top: 0;\n    width: 15px;\n    height: 15px;\n    border: 0px solid transparent;\n    border-radius: 50%;\n    background-color: #eee;\n    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);\n            box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);\n    -webkit-transition: left .4s ease, background-color .4s ease;\n    transition: left .4s ease, background-color .4s ease;\n}\n#change-color-button[data-v-0796f940]::after {\n    left: 0;\n}\n#change-color-button[data-v-0796f940]:checked::after {\n    left: 35px;\n}\n", ""]);
 
 // exports
 
@@ -45844,6 +45886,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -45853,12 +45897,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     changeColor: function changeColor() {
-      console.log($(this).attr('checked'));
-      this.btnText = 'stroke';
+      this.btnText = this.btnText == 'stroke' ? 'fill' : 'stroke';
       this.$emit('changeColor');
-    },
-    confirm: function confirm() {
-      console.log('clicked');
     }
   }
 });
@@ -45871,18 +45911,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "change-color-button", on: { click: _vm.confirm } },
-    [
-      _c("span", [_vm._v(_vm._s(_vm.btnText) + ":")]),
-      _vm._v(" "),
+  return _c("div", { staticClass: "change-color-button" }, [
+    _c("span", [_vm._v(_vm._s(_vm.btnText) + ":")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "toggle-container" }, [
       _c("input", {
         attrs: { type: "checkbox", id: "change-color-button" },
         on: { click: _vm.changeColor }
       })
-    ]
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46122,7 +46160,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.o-grid__item[data-v-b316d3d4] {\n  position: fixed;\n  top: 50%;\n  left: 40px;\n  margin-top: -50px;\n  z-index: 100;\n}\n.c-hamburger[data-v-b316d3d4] {\n  display: block;\n  position: relative;\n  margin: 0;\n  padding: 0;\n  width: 65px;\n  height: 96px;\n  font-size: 0;\n  text-indent: -9999px;\n  cursor: pointer;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n  border-radius: none;\n  border: none;\n}\n.c-hamburger span[data-v-b316d3d4] {\n    display: block;\n    position: absolute;\n    top: 44px;\n    left: 5px;\n    right: 18px;\n    height: 1px;\n    background: #fff;\n}\n.c-hamburger span[data-v-b316d3d4]::before, .c-hamburger span[data-v-b316d3d4]::after {\n      content: \"\";\n      display: block;\n      position: absolute;\n      left: 0;\n      height: 1px;\n      background-color: #fff;\n}\n.c-hamburger span[data-v-b316d3d4]::before {\n      top: -9px;\n      width: 100%;\n}\n.c-hamburger span[data-v-b316d3d4]::after {\n      bottom: -9px;\n      width: 50%;\n}\n.c-hamburger--htla[data-v-b316d3d4] {\n  background: 0 0;\n}\n", ""]);
+exports.push([module.i, "\n.o-grid__item[data-v-b316d3d4] {\n  position: fixed;\n  top: 50%;\n  left: 40px;\n  margin-top: -50px;\n  z-index: 100;\n}\n.c-hamburger[data-v-b316d3d4] {\n  display: block;\n  position: relative;\n  margin: 0;\n  padding: 0;\n  width: 65px;\n  height: 96px;\n  font-size: 0;\n  text-indent: -9999px;\n  cursor: pointer;\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none;\n  -webkit-box-shadow: none;\n          box-shadow: none;\n  border-radius: none;\n  border: none;\n}\n.c-hamburger span[data-v-b316d3d4] {\n    display: block;\n    position: absolute;\n    top: 44px;\n    left: 5px;\n    right: 18px;\n    height: 1px;\n    background: #fff;\n}\n.c-hamburger span[data-v-b316d3d4]::before, .c-hamburger span[data-v-b316d3d4]::after {\n      content: \"\";\n      display: block;\n      position: absolute;\n      left: 0;\n      height: 1px;\n      background-color: #fff;\n      -webkit-transition: -webkit-transform .3s,width .3s,bottom .3s;\n      -webkit-transition: width .3s,bottom .3s,-webkit-transform .3s;\n      transition: width .3s,bottom .3s,-webkit-transform .3s;\n      transition: transform .3s,width .3s,bottom .3s;\n      transition: transform .3s,width .3s,bottom .3s,-webkit-transform .3s;\n}\n.c-hamburger span[data-v-b316d3d4]::before {\n      top: var(--linetop);\n      width: 100%;\n}\n.c-hamburger span[data-v-b316d3d4]::after {\n      bottom: var(--linebottom);\n      width: 50%;\n}\n.c-hamburger span.active[data-v-b316d3d4]::before {\n    top: 0;\n    width: 50%;\n    -webkit-transform: translateX(-3px) translateY(-7px) rotate(-45deg);\n    transform: translateX(-3px) translateY(-7px) rotate(-45deg);\n}\n.c-hamburger span.active[data-v-b316d3d4]::after {\n    bottom: 0;\n    width: 50%;\n    -webkit-transform: translateX(-3px) translateY(7px) rotate(45deg);\n    transform: translateX(-3px) translateY(7px) rotate(45deg);\n}\n.c-hamburger--htla[data-v-b316d3d4] {\n  background: 0 0;\n}\n", ""]);
 
 // exports
 
@@ -46148,18 +46186,37 @@ var eventHub = __webpack_require__(17).eventHub;
     return {
       styleObject: {
         display: 'none'
-      }
+      },
+      menuBtnStyle: {
+        '--linetop': '-9px',
+        '--linebottom': '-9px'
+      },
+      is_active: false
     };
   },
   created: function created() {
-    eventHub.$on('displayMenuContent', this.displayMenuBtn);
+    eventHub.$on('enableMenuContent', this.displayMenuBtn);
   },
   methods: {
     displayMenuBtn: function displayMenuBtn() {
-      console.log('emitted');
       this.styleObject = {
         display: 'block'
       };
+    },
+    onClicked: function onClicked() {
+      if (this.is_active) {
+        this.Arrow2Hamburger();
+        eventHub.$emit('closeMenu');
+      } else {
+        this.hamburger2Arrow();
+        eventHub.$emit('showMenu');
+      }
+    },
+    hamburger2Arrow: function hamburger2Arrow() {
+      this.is_active = true;
+    },
+    Arrow2Hamburger: function Arrow2Hamburger() {
+      this.is_active = false;
     }
   }
 });
@@ -46178,19 +46235,25 @@ var render = function() {
       staticClass: "o-grid__item hover-target hideOnLoad",
       style: _vm.styleObject
     },
-    [_vm._m(0)]
+    [
+      _c(
+        "button",
+        {
+          staticClass: "c-hamburger c-hamburger--htla",
+          on: { click: _vm.onClicked }
+        },
+        [
+          _c(
+            "span",
+            { class: { active: _vm.is_active }, style: _vm.menuBtnStyle },
+            [_vm._v("toggle menu")]
+          )
+        ]
+      )
+    ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "c-hamburger c-hamburger--htla" }, [
-      _c("span", [_vm._v("toggle menu")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -46286,7 +46349,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.menu-content[data-v-382594b3] {\n  position: absolute;\n  top: 0;\n  left: -100%;\n  z-index: 100;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  width: 100%;\n  height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.menu-container[data-v-382594b3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  top: 0;\n  left: 0;\n  color: #ebebeb;\n  z-index: 100;\n}\n.menu-container a[data-v-382594b3] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.menu-container a .bg[data-v-382594b3] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: -1;\n    opacity: 0;\n}\n.menu-container h3[data-v-382594b3] {\n    font: 400 10px \"Proxima Nova\",Arial,Helvetica,sans-serif;\n    text-transform: uppercase;\n    color: rgba(255, 255, 255, 0.5);\n    letter-spacing: 2px;\n    margin-top: 0;\n    -webkit-transform: translateX(10px);\n    transform: translateX(10px);\n}\n.menu-container .grad-red[data-v-382594b3]:hover {\n    background: #221884;\n    background: linear-gradient(45deg, #221884 0, #be3679 50%, #ffa458 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#221884', endColorstr='#ffa458', GradientType=1 );\n}\n.menu-container .menu-content[data-v-382594b3] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    width: 100%;\n    height: 100%;\n}\n.menu-container .nav-item[data-v-382594b3] {\n    width: 100%;\n    height: 100%;\n    background: #2a0aa9;\n    background: linear-gradient(45deg, #2a0aa9 0, #7e9879 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a0aa9', endColorstr='#7c139d', GradientType=1 );\n}\n", ""]);
 
 // exports
 
@@ -46319,11 +46382,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 var eventHub = __webpack_require__(17).eventHub;
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['url'],
   data: function data() {
     return {
       styleObject: {
@@ -46332,13 +46394,18 @@ var eventHub = __webpack_require__(17).eventHub;
     };
   },
   created: function created() {
-    eventHub.$on('displayMenuContent', this.displayMenuContent);
+    eventHub.$on('enableMenuContent', this.enableMenuContent);
   },
   methods: {
-    displayMenuContent: function displayMenuContent() {
+    enableMenuContent: function enableMenuContent() {
       this.styleObject = {
         display: 'block'
       };
+    }
+  },
+  computed: {
+    worksUrl: function worksUrl() {
+      return JSON.parse(this.url).works;
     }
   }
 });
@@ -46351,12 +46418,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "menu-content", style: _vm.styleObject }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _vm._m(1),
-    _vm._v(" "),
-    _vm._m(2)
+  return _c("div", { staticClass: "menu-container", style: _vm.styleObject }, [
+    _c("div", { staticClass: "menu-content" }, [
+      _c("div", { staticClass: "nav-item" }),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "nav-item grad-red" }, [
+        _c(
+          "a",
+          { staticClass: "scroll-nav nav-menu", attrs: { href: _vm.worksUrl } },
+          [_c("h3", [_vm._v("works")])]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -46364,50 +46441,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "about" }, [
-      _c(
-        "a",
-        { staticClass: "scroll-nav nav-menu", attrs: { href: "#about" } },
-        [
-          _c("div", { staticClass: "bg grad-red" }),
-          _vm._v(" "),
-          _c("h3", [_vm._v("about")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "works" }, [
-      _c(
-        "a",
-        { staticClass: "scroll-nav nav-menu", attrs: { href: "#works" } },
-        [
-          _c("div", { staticClass: "bg grad-red" }),
-          _vm._v(" "),
-          _c("h3", [_vm._v("works")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "skill" }, [
-      _c("div", { staticClass: "skill" }, [
-        _c(
-          "a",
-          { staticClass: "scroll-nav nav-menu", attrs: { href: "#skill" } },
-          [
-            _c("div", { staticClass: "bg grad-red" }),
-            _vm._v(" "),
-            _c("h3", [_vm._v("skill")])
-          ]
-        )
+    return _c("div", { staticClass: "nav-item grad-red" }, [
+      _c("a", { staticClass: "scroll-nav nav-menu", attrs: { href: "" } }, [
+        _c("h3", [_vm._v("about")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "nav-item grad-red" }, [
+      _c(
+        "a",
+        { staticClass: "scroll-nav nav-menu", attrs: { href: "#skill" } },
+        [_c("h3", [_vm._v("skill")])]
+      )
     ])
   }
 ]

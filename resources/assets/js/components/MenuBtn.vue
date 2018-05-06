@@ -1,7 +1,7 @@
 <template>
   <div class="o-grid__item hover-target hideOnLoad" :style="styleObject">
-    <button class="c-hamburger c-hamburger--htla">
-      <span>toggle menu</span>
+    <button class="c-hamburger c-hamburger--htla" v-on:click="onClicked">
+      <span :class="{ 'active': is_active }" :style="menuBtnStyle">toggle menu</span>
     </button>
   </div>
 </template>
@@ -13,18 +13,37 @@ export default {
     return {
       styleObject: {
         display: 'none'
-      }
+      },
+      menuBtnStyle: {
+        '--linetop': '-9px',
+        '--linebottom': '-9px',
+      },
+      is_active: false,
     }
   },
   created: function () {
-    eventHub.$on('displayMenuContent', this.displayMenuBtn);
+    eventHub.$on('enableMenuContent', this.displayMenuBtn);
   },
   methods: {
     displayMenuBtn: function() {
-      console.log('emitted')
       this.styleObject = {
         display: 'block'
       }
+    },
+    onClicked :function() {
+      if (this.is_active) {
+        this.Arrow2Hamburger();
+        eventHub.$emit('closeMenu');
+      } else {
+        this.hamburger2Arrow();
+        eventHub.$emit('showMenu');
+      }
+    },
+    hamburger2Arrow :function() {
+      this.is_active = true;
+    },
+    Arrow2Hamburger: function() {
+      this.is_active = false;
     }
   }
 }
@@ -61,6 +80,7 @@ export default {
     left: 5px;
     right: 18px;
     height: 1px;
+    background: #fff;
 
     &::before,
     &::after {
@@ -70,17 +90,36 @@ export default {
       left: 0;
       height: 1px;
       background-color: #fff;
+      -webkit-transition: -webkit-transform .3s,width .3s,bottom .3s;
+      transition: transform .3s,width .3s,bottom .3s;
     }
     &::before {
-      top: -9px;
+      top: var(--linetop);
       width: 100%;
     }
     &::after {
-      bottom: -9px;
+      bottom: var(--linebottom);
       width: 50%;
     }
-    background: #fff;
   }
+
+  span.active {
+    &::before {
+      top: 0;
+      width: 50%;
+      -webkit-transform: translateX(-3px) translateY(-7px) rotate(-45deg);
+      -ms-transform: translateX(-3px) translateY(-7px) rotate(-45deg);
+      transform: translateX(-3px) translateY(-7px) rotate(-45deg);
+    }
+    &::after {
+      bottom: 0;
+      width: 50%;
+      -webkit-transform: translateX(-3px) translateY(7px) rotate(45deg);
+      -ms-transform: translateX(-3px) translateY(7px) rotate(45deg);
+      transform: translateX(-3px) translateY(7px) rotate(45deg);
+    }
+  }
+
 }
 .c-hamburger--htla {
   background: 0 0;

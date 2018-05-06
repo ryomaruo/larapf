@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'AppController@app')->name('app');
+Route::get('works/', 'WorksController@index')->name('works');
+Route::get('works/rotategeo', 'WorksController@rotategeo')->name('rotategeo');
 
-Route::get('/works/rotategeo', 'WorksController@rotategeo')->name('rotategeo');
-
-Route::get('/works/staygreen', 'WorksController@staygreen')->name('staygreen');
+Route::get('works/staygreen', 'WorksController@staygreen')->name('staygreen');
 
 Auth::routes();
 

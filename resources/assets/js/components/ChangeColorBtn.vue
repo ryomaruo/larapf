@@ -1,7 +1,9 @@
 <template>
-  <div class="change-color-button" v-on:click="confirm">
+  <div class="change-color-button">
     <span>{{ btnText }}:</span>
-    <input type="checkbox" id="change-color-button" v-on:click="changeColor">
+    <div class="toggle-container">
+      <input type="checkbox" id="change-color-button" v-on:click="changeColor">
+    </div>
   </div>
 </template>
 <script>
@@ -13,12 +15,8 @@
     },
     methods: {
       changeColor: function() {
-        console.log($(this).attr('checked'));
-        this.btnText = 'stroke';
+        this.btnText = (this.btnText == 'stroke')? 'fill':'stroke';
         this.$emit('changeColor');
-      },
-      confirm: function() {
-        console.log('clicked');
       }
     }
   }
@@ -34,11 +32,16 @@
     opacity:0;
   }
 }
+
+input[type="checkbox"]:focus{
+  outline:0;
+}
 .change-color-button {
   position: absolute;
   top: 30px;
   right: 5%;
-  width: 120px;
+  width: 180px;
+  height: 40px;
   padding: 5px;
   text-align: center;
   vertical-align: middle;
@@ -50,8 +53,17 @@
   -webkit-animation-duration: 2s;
   z-index: 4;
   span {
-    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
   }
+}
+.toggle-container {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
 }
 #change-color-button {
   appearance: none;
