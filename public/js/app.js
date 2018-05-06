@@ -12541,6 +12541,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
   components: {
     'clicked-circle': __webpack_require__(125),
     'menu-btn': __webpack_require__(130),
+    'menu-section': __webpack_require__(147),
     'menu-content': __webpack_require__(135),
     'skip-button': __webpack_require__(13),
     'my_section': __webpack_require__(14),
@@ -43880,7 +43881,7 @@ var eventHub = __webpack_require__(17).eventHub;
         promise_main.done(function () {
           setTimeout(function () {
             //works-sectionが表示されるまでに6秒かかるので、遅延させる。
-            eventHub.$emit('enableMenuContent');
+            eventHub.$emit('enableMenu');
           }, 6000);
         });
       });
@@ -44042,7 +44043,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.section-content.outer-content[data-v-01004a1c] {\n  position: fixed;\n  height: 100%;\n}\n.section-content.inner-content[data-v-01004a1c] {\n  height: 100%;\n}\n.section[data-v-01004a1c] {\n  position: relative;\n}\n.section.menu-section[data-v-01004a1c] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: var(--menu-width);\n    height: 100%;\n    z-index: 3;\n    -webkit-transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n}\n.section-clipper[data-v-01004a1c] {\n  clip: rect(auto, auto, auto, auto);\n  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-clipper[data-v-01004a1c], .section-content[data-v-01004a1c] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n.expand-section[data-v-01004a1c] {\n  position: absolute !important;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-animation-name: expand;\n  -webkit-animation-duration: 10s;\n}\n", ""]);
+exports.push([module.i, "\n.section-content.outer-content[data-v-01004a1c] {\n  position: fixed;\n  height: 100%;\n}\n.section-content.inner-content[data-v-01004a1c] {\n  height: 100%;\n}\n.section[data-v-01004a1c] {\n  position: relative;\n}\n.section.menu-section[data-v-01004a1c] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: var(--menu-width);\n    height: 100%;\n    z-index: 3;\n    -webkit-transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n}\n.section.menu-section .section-clipper[data-v-01004a1c] {\n      clip: rect(auto, auto, auto, auto);\n      -webkit-clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%, 0 0);\n      clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%, 0 0);\n}\n.section-clipper[data-v-01004a1c] {\n  clip: rect(auto, auto, auto, auto);\n  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n  clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n}\n.section-clipper[data-v-01004a1c], .section-content[data-v-01004a1c] {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  top: 0;\n  left: 0;\n}\n.expand-section[data-v-01004a1c] {\n  position: absolute !important;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  -webkit-animation-name: expand;\n  -webkit-animation-duration: 10s;\n}\n", ""]);
 
 // exports
 
@@ -44083,7 +44084,7 @@ var eventHub = __webpack_require__(17).eventHub;
   components: {
     'hello': __webpack_require__(57),
     'p5canvas': __webpack_require__(15),
-    'menu-content': __webpack_require__(135),
+    'menu-section': __webpack_require__(147),
     'rotatebox': __webpack_require__(105),
     'staygreen': __webpack_require__(115)
   },
@@ -44618,7 +44619,7 @@ var eventHub = __webpack_require__(17).eventHub;
         promise_main.done(function () {
           setTimeout(function () {
             //works-sectionが開くのを待って、6秒間遅延。
-            eventHub.$emit('enableMenuContent');
+            eventHub.$emit('enableMenu');
           }, 6000);
           defer.resolve();
         });
@@ -46195,7 +46196,7 @@ var eventHub = __webpack_require__(17).eventHub;
     };
   },
   created: function created() {
-    eventHub.$on('enableMenuContent', this.displayMenuBtn);
+    eventHub.$on('enableMenu', this.displayMenuBtn);
   },
   methods: {
     displayMenuBtn: function displayMenuBtn() {
@@ -46349,13 +46350,197 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.menu-container[data-v-382594b3] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  top: 0;\n  left: 0;\n  color: #ebebeb;\n  z-index: 100;\n}\n.menu-container a[data-v-382594b3] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.menu-container a .bg[data-v-382594b3] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: -1;\n    opacity: 0;\n}\n.menu-container h3[data-v-382594b3] {\n    font: 400 10px \"Proxima Nova\",Arial,Helvetica,sans-serif;\n    text-transform: uppercase;\n    color: rgba(255, 255, 255, 0.5);\n    letter-spacing: 2px;\n    margin-top: 0;\n    -webkit-transform: translateX(10px);\n    transform: translateX(10px);\n}\n.menu-container .grad-red[data-v-382594b3]:hover {\n    background: #221884;\n    background: linear-gradient(45deg, #221884 0, #be3679 50%, #ffa458 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#221884', endColorstr='#ffa458', GradientType=1 );\n}\n.menu-container .menu-content[data-v-382594b3] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    width: 100%;\n    height: 100%;\n}\n.menu-container .nav-item[data-v-382594b3] {\n    width: 100%;\n    height: 100%;\n    background: #2a0aa9;\n    background: linear-gradient(45deg, #2a0aa9 0, #7e9879 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a0aa9', endColorstr='#7c139d', GradientType=1 );\n}\n", ""]);
+exports.push([module.i, "\n.menu-contents[data-v-382594b3] {\n  width: 0%;\n  height: 100%;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 5;\n}\n.menu-clip-container[data-v-382594b3] {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  width: 100%;\n  height: 100%;\n}\n.menu-clip-container .menu-clipper[data-v-382594b3] {\n    position: absolute;\n    bottom: 0;\n    right: 0;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 0;\n    clip: rect(auto, auto, auto, auto);\n    -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n    clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 0);\n    -webkit-transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n    transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);\n}\n.menu-clip-container .menu-content[data-v-382594b3] {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background: #000;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 138 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var eventHub = __webpack_require__(17).eventHub;
+/* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    eventHub.$on('slideContentClipper', this.slideContentClipper);
+  },
+  mounted: function mounted() {},
+  methods: {
+    slideContentClipper: function slideContentClipper() {}
+  }
+});
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "menu-contents" }, [
+      _c("div", { staticClass: "menu-clip-container" }, [
+        _c("div", { staticClass: "menu-clipper" }, [
+          _c("div", { staticClass: "menu-content" }, [
+            _c("span", [_vm._v("About Content")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "menu-clipper" }, [
+          _c("div", { staticClass: "menu-content" }, [
+            _c("span", [_vm._v("skill Content")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "menu-clipper" }, [
+          _c("div", { staticClass: "menu-content" }, [
+            _c("span", [_vm._v("works Content")])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-382594b3", module.exports)
+  }
+}
+
+/***/ }),
+/* 140 */,
+/* 141 */,
+/* 142 */,
+/* 143 */,
+/* 144 */,
+/* 145 */,
+/* 146 */,
+/* 147 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(148)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(150)
+/* template */
+var __vue_template__ = __webpack_require__(151)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-719ac91f"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/MenuSection.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-719ac91f", Component.options)
+  } else {
+    hotAPI.reload("data-v-719ac91f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(149);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("316af398", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-719ac91f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuSection.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-719ac91f\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./MenuSection.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.menu-container[data-v-719ac91f] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  top: 0;\n  left: 0;\n  color: #ebebeb;\n}\n.menu-container a[data-v-719ac91f] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.menu-container a .bg[data-v-719ac91f] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: -1;\n    opacity: 0;\n}\n.menu-container h3[data-v-719ac91f] {\n    font: 400 10px \"Proxima Nova\",Arial,Helvetica,sans-serif;\n    text-transform: uppercase;\n    color: rgba(255, 255, 255, 0.5);\n    letter-spacing: 2px;\n    margin-top: 0;\n    -webkit-transform: translateX(10px);\n    transform: translateX(10px);\n}\n.menu-container .grad-red[data-v-719ac91f]:hover {\n    background: #221884;\n    background: linear-gradient(45deg, #221884 0, #be3679 50%, #ffa458 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#221884', endColorstr='#ffa458', GradientType=1 );\n}\n.menu-container .menu[data-v-719ac91f] {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    width: 100%;\n    height: 100%;\n}\n.menu-container .nav-item[data-v-719ac91f] {\n    width: 100%;\n    height: 100%;\n    background: #2a0aa9;\n    background: linear-gradient(45deg, #2a0aa9 0, #7e9879 100%);\n    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a0aa9', endColorstr='#7c139d', GradientType=1 );\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 150 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46394,10 +46579,15 @@ var eventHub = __webpack_require__(17).eventHub;
     };
   },
   created: function created() {
-    eventHub.$on('enableMenuContent', this.enableMenuContent);
+    eventHub.$on('enableMenu', this.enableMenu);
+  },
+  mounted: function mounted() {
+    $('.nav-item.skill').on('click', function () {
+      eventHub.$emit('slideContentClipper');
+    });
   },
   methods: {
-    enableMenuContent: function enableMenuContent() {
+    enableMenu: function enableMenu() {
       this.styleObject = {
         display: 'block'
       };
@@ -46411,7 +46601,7 @@ var eventHub = __webpack_require__(17).eventHub;
 });
 
 /***/ }),
-/* 139 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46419,19 +46609,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "menu-container", style: _vm.styleObject }, [
-    _c("div", { staticClass: "menu-content" }, [
+    _c("div", { staticClass: "menu" }, [
       _c("div", { staticClass: "nav-item" }),
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
-      _c("div", { staticClass: "nav-item grad-red" }, [
-        _c(
-          "a",
-          { staticClass: "scroll-nav nav-menu", attrs: { href: _vm.worksUrl } },
-          [_c("h3", [_vm._v("works")])]
-        )
+      _c("div", { staticClass: "nav-item grad-red works" }, [
+        _c("a", { attrs: { href: _vm.worksUrl } }, [
+          _c("h3", [_vm._v("works")])
+        ])
       ])
     ])
   ])
@@ -46441,22 +46629,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "nav-item grad-red" }, [
-      _c("a", { staticClass: "scroll-nav nav-menu", attrs: { href: "" } }, [
-        _c("h3", [_vm._v("about")])
-      ])
+    return _c("div", { staticClass: "nav-item grad-red about" }, [
+      _c("a", { attrs: { href: "" } }, [_c("h3", [_vm._v("about")])])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "nav-item grad-red" }, [
-      _c(
-        "a",
-        { staticClass: "scroll-nav nav-menu", attrs: { href: "#skill" } },
-        [_c("h3", [_vm._v("skill")])]
-      )
+    return _c("div", { staticClass: "nav-item grad-red skill" }, [
+      _c("a", { attrs: { href: "#skill" } }, [_c("h3", [_vm._v("skill")])])
     ])
   }
 ]
@@ -46465,7 +46647,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-382594b3", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-719ac91f", module.exports)
   }
 }
 

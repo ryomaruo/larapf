@@ -22,7 +22,7 @@ export default {
     }
   },
   created: function () {
-    eventHub.$on('enableMenuContent', this.displayMenuBtn);
+    eventHub.$on('enableMenu', this.displayMenuBtn);
   },
   methods: {
     displayMenuBtn: function() {

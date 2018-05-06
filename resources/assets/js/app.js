@@ -23,6 +23,7 @@ const app = new Vue({
     components: {
       'clicked-circle': require('./components/ClickedCircle.vue'),
       'menu-btn': require('./components/MenuBtn.vue'),
+      'menu-section': require('./components/MenuSection.vue'),
       'menu-content': require('./components/MenuContent.vue'),
       'skip-button': require('./components/SkipButton.vue'),
       'my_section': require('./components/MySection.vue'),

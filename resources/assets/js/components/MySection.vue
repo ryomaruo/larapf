@@ -26,7 +26,7 @@
     components: {
      'hello': require('./Hello.vue'),
      'p5canvas': require('./P5Canvas.vue'),
-     'menu-content':require('./MenuContent.vue'),
+     'menu-section':require('./MenuSection.vue'),
      'rotatebox':require('./works/RotateBox.vue'),
      'staygreen':require('./works/StayGreen.vue')
     },
@@ -68,6 +68,12 @@
     z-index: 3;
     -webkit-transition: all .8s cubic-bezier(.19,1,.22,1);
     transition: all .8s cubic-bezier(.19,1,.22,1);
+
+    .section-clipper {
+      clip: rect(auto, auto, auto, auto);
+      -webkit-clip-path: polygon(0 0, 100% 20%,100% 80% , 0 100%, 0 0);
+      clip-path: polygon(0 0, 100% 20%,100% 80% , 0 100%, 0 0);
+    }
   }
 }
 .section-clipper {
