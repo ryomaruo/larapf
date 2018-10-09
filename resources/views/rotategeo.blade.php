@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Daiki</title>
+    <title>Ryo</title>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/reset.css"/>
     <script type="text/javascript">

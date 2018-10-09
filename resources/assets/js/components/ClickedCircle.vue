@@ -33,13 +33,13 @@
 <style scoped lang="scss">
   @-webkit-keyframes pulse{
     0%{
-    -webkit-box-shadow:0 0 0 0 rgba(100,100,100,.4)
+    -webkit-box-shadow:0 0 0 0 rgba(200,200,200,.4)
     }
     70%{
-      -webkit-box-shadow:0 0 0 30px rgba(100,100,100,0)
+      -webkit-box-shadow:0 0 0 30px rgba(200,200,200,0)
     }
     100%{
-      -webkit-box-shadow:0 0 0 0 rgba(100,100,100,0)
+      -webkit-box-shadow:0 0 0 0 rgba(200,200,200,0)
     }
   }
   #cursor {

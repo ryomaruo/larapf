@@ -110,12 +110,16 @@
         return false;
       },
       changeCanvasStr: function() {
-        $('.fixed-canvas-area .sentence:hover')
-          .addClass('pointer');
         $('.fixed-canvas-area .sentence')
+          .addClass('shadow')
           .css({
               background: 'linear-gradient(45deg, #221884 0, #be3679 50%, #ffa458 100%)',
               padding: '10px 0'
+          });
+          $('.fixed-canvas-area .sentence').hover(function() {
+            $(this).addClass('sentence-hover');
+          }, function() {
+            $(this).removeClass('sentence-hover');
           });
       },
       addOnClickToSentence: function(defer) {
@@ -192,6 +196,7 @@
   height: 100%;
   .sentence {
     width: 800px;
+    border-radius: 5px;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -200,5 +205,9 @@
     font-size: 90px;
     z-index: 1;
   }
+}
+.sentence-hover {
+  cursor: pointer;
+  transform: translate(-50%, -55%);
 }
 </style>

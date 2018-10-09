@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Daiki</title>
+    <title>Ryo</title>
     <link rel="stylesheet" href="css/app.css"/>
     <link rel="stylesheet" href="css/reset.css"/>
     <script type="text/javascript">
@@ -17,7 +17,7 @@
     <skip-button></skip-button>
     <menu-btn></menu-btn>
     <menu-content></menu-content>
-    <my_section tmpl_name="menu-section" is_menu="true" url="{{ $url }}"></my_section>
+    <menu-section url="{{ $url }}"></menu-section>
     <!-- <nav-content content="about"></nav-content>
     <nav-content content="works"></nav-content>
     <nav-content content="skill"></nav-content> -->

@@ -8473,5 +8473,10 @@ body {
   cursor: pointer;
 }
 
+.shadow {
+  -webkit-box-shadow: 0 2px 15px #222222;
+  box-shadow: 0 2px 15px #222222;
+}
+
 /* ^^^  util  ^^^ */
 

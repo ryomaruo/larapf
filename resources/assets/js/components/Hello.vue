@@ -4,16 +4,16 @@
       <div class="s-im">
         <span>I'm</span>
       </div>
-      <div class="s-daiki">
-        <span>Daiki</span>
+      <div class="s-ryo">
+        <span>Ryo</span>
       </div>
     </div>
     <div class="text-center job-intro">
       <div class="s-web">
-        <span>Web & Android</span>
+        <span>Web</span>
       </div>
       <div class="s-developer">
-        <span>Developer</span>
+        <span>Developerrr</span>
       </div>
     </div>
   </div>
@@ -56,7 +56,7 @@ export default {
     .s-im {
       font-size: 40px;
     }
-    .s-daiki {
+    .s-ryo {
       font-size: 225px;
     }
   }
